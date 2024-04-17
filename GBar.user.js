@@ -112,7 +112,7 @@ gBar.innerHTML = `
     display: flex;
     position: relative;
     z-index: 2;
-    height: 29px;
+    height: 30px;
     width: 28px;
     background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/SettingsIcon.svg');
     background-repeat: no-repeat;
