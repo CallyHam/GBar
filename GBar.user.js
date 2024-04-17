@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.2.1
+// @version      1.3.0
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -62,6 +62,22 @@ async function applySettings() {
     var linkSelect = await GM.getValue("linkSelect", "web");
 
     switch (styleSelect) {
+        case "2009":
+            var gbar2009 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2009.html'
+            var gbar2009Response = await fetch(gbar2009);
+            var gbar2009Data = await gbar2009Response.text();
+            gBar.classList.add('gbar');
+            gBar.innerHTML = gbar2009Data
+            document.body.insertBefore(gBar, document.body.firstChild);
+            break
+        case "2010":
+            var gbar2010 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2010.html'
+            var gbar2010Response = await fetch(gbar2010);
+            var gbar2010Data = await gbar2010Response.text();
+            gBar.classList.add('gbar');
+            gBar.innerHTML = gbar2010Data;
+            document.body.insertBefore(gBar, document.body.firstChild);
+            break
         case "2011":
             var gbar2011 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2011.html'
             var gbar2011Response = await fetch(gbar2011);
@@ -79,7 +95,6 @@ async function applySettings() {
             document.body.insertBefore(gBar, document.body.firstChild);
             document.body.insertBefore(gBar, document.body.firstChild);
             break
-
     }
     getUrl()
 
@@ -101,6 +116,8 @@ async function applySettings() {
             accountArrow.classList.add('gbar-link-arrow')
             accountButton.href = "https://accounts.google.com/SignOutOptions"
             accountButton.appendChild(accountArrow)
+        } else if (styleSelect == "2009") {
+            accountButton.classList.add('signed-in')
         }
     }
 
@@ -261,8 +278,8 @@ settingsPage.innerHTML = `
     <div class="gbar-settings-section">
         <span class="gbar-setting-title">Style Selection</span>
         <select class="gbar-select-setting" name="year-style" id="year-style">
-            <option value="2009">2009 (Not Working)</option>
-            <option value="2010">2010 (Not Working)</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
             <option value="2011">2011</option>
             <option value="2013">2013</option>
         </select>
