@@ -9,8 +9,9 @@ This userscript adds the old top bar (GBar) back to google.
 ## Previews
 ![preview1](https://github.com/CallyHam/GBar/blob/main/previews/preview1.png?raw=true)
 ![preview2](https://github.com/CallyHam/GBar/blob/main/previews/preview2.png?raw=true)
+![preview3](https://github.com/CallyHam/GBar/blob/main/previews/preview3.png?raw=true)
 
 ## Features
  * [X] Basic Functionality
  * [ ] Extra Selectable Themes
- * [ ] Extra Configuration Options
+ * [X] Extra Configuration Options
