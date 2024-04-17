@@ -12,5 +12,5 @@ This userscript adds the old top bar (GBar) back to google.
 
 ## Features
  * [X] Basic Functionality
- * [ ] Extra Themes
+ * [ ] Extra Selectable Themes
  * [ ] Extra Configuration Options
