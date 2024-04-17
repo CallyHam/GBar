@@ -106,7 +106,7 @@ gBar.innerHTML = `
 .gbar-link-separator {
     width: 1px;
     height: 100%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 25%) 50%, rgba(255, 255, 255, 0) 100%)
+    background: linear-gradient(0deg, rgba(255, 255, 255, 2%) 0%, rgba(255, 255, 255, 25%) 50%, rgba(255, 255, 255, 0%) 100%)
 }
 .gbar-link-settings {
     display: flex;
