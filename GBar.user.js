@@ -114,7 +114,7 @@ gBar.innerHTML = `
     z-index: 2;
     height: 29px;
     width: 28px;
-    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/SettingsIcon.svg');
+    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/SettingsIcon.svg');
     background-repeat: no-repeat;
     background-position: 50%;
 }
@@ -179,7 +179,7 @@ gBar.innerHTML = `
     cursor: default;
 }
 .gbar-link-dropdown:hover .gbar-link-settings {
-    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/SettingsIconHover.svg');
+    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/SettingsIconHover.svg');
     background-color: #fff;
     background-repeat: no-repeat;
     background-position: 50%;
