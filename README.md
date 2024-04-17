@@ -14,11 +14,36 @@ This userscript adds the old top bar (GBar) back to google.
 * Modify your desired settings and click "OK"
 
 ## Previews
-![preview1](https://github.com/CallyHam/GBar/blob/main/previews/preview1.png?raw=true)
-![preview2](https://github.com/CallyHam/GBar/blob/main/previews/preview2.png?raw=true)
-![preview3](https://github.com/CallyHam/GBar/blob/main/previews/preview3.png?raw=true)
+<details><summary>2009</summary>
+
+  
+![2009](https://github.com/CallyHam/GBar/blob/main/previews/2009.png?raw=true)
+</details>
+<details><summary>2010</summary>
+
+  
+![2010 1](https://github.com/CallyHam/GBar/blob/main/previews/2010-1.png?raw=true)
+![2010 2](https://github.com/CallyHam/GBar/blob/main/previews/2010-2.png?raw=true)
+</details>
+<details><summary>2011</summary>
+
+
+![2011 1](https://github.com/CallyHam/GBar/blob/main/previews/2011-1.png?raw=true)
+![2011 2](https://github.com/CallyHam/GBar/blob/main/previews/2011-2.png?raw=true)
+</details>
+<details><summary>2013</summary>
+
+
+![2013 1](https://github.com/CallyHam/GBar/blob/main/previews/2013-1.png?raw=true)
+![2013 2](https://github.com/CallyHam/GBar/blob/main/previews/2013-2.png?raw=true)
+</details>
+<details><summary>Settings Window</summary>
+
+
+![Settings](https://github.com/CallyHam/GBar/blob/main/previews/settings.png?raw=true)
+</details>
 
 ## Features
  * [X] Basic Functionality
- * [ ] Extra Selectable Themes
+ * [X] Extra Selectable Themes
  * [X] Extra Configuration Options
