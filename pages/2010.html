@@ -1,0 +1,227 @@
+<style>
+body {margin: 0;}
+.gbar {
+    z-index: 998;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    position: relative;
+    height: 29px;
+    background-color: #fff;
+    box-shadow: inset 0 2px #bad3ea;
+    border-bottom: 1px solid #f5f5f5;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+.gbar-links-row {
+    display: flex;
+    align-items: center;
+}
+.gbar-link {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    padding: 3px 7px 0 7px;
+    height: 29px;
+    align-items: center;
+    text-decoration: none !important;
+}
+.gbar-link-text {
+    color: #36c;
+    white-space: nowrap;
+}
+.gbar-link-active.gbar-link {
+    box-shadow: inset 0 4px 0 #1a54e1;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+.gbar-link-active .gbar-link-text {
+    color: #363636;
+    font-weight: bold;
+}
+.gbar-link-arrow {
+    border: 3px solid transparent;
+    border-top: 3px solid #36c;
+    margin-left: 4px;
+    margin-top: 5px;
+}
+.gbar-link-separator {
+    width: 1px;
+    height: 100%;
+    box-shadow: inset 0 2px #fff;
+    background-color: #e6e6e6;
+}
+.gbar-link-settings {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    height: 31px;
+    width: 28px;
+    margin-top: 5px !important;
+    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/Settings2010.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 40%;
+}
+.gbar-more-menu, .gbar-settings-menu {
+    display: none;
+}
+.gbar-more-link {
+    color: #36c !important;
+    text-decoration: none !important;
+    padding: 6px 12px 6px 7px;
+}
+.gbar-more-link:hover {
+    text-decoration: underline !important;
+}
+.gbar-more-link-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+}
+#gbar-link-more {
+    margin-top: 5px;
+    padding: 0 6px 2px 6px;
+    border: 1px solid transparent;
+}
+.gbar-link-dropdown {
+    position: relative;
+}
+.gbar-link-dropdown:hover > .gbar-more-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 0;
+    background-color: #fff;
+    border: 1px solid #c3d1ec;
+    box-shadow: 0 1px 5px #ccc;
+    top: calc(100% - 1px);
+    left: 0;
+}
+.gbar-link-dropdown:hover > .gbar-settings-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 0;
+    background-color: #fff;
+    border: 1px solid #c3d1ec;
+    box-shadow: 0 1px 5px #ccc;
+    top: calc(100% - 1px);
+    right: 0;
+}
+.gbar-link-dropdown:hover .gbar-link {
+    background-color: #fff;
+    border: none !important;
+    margin-top: 5px !important;
+    border-left: 1px solid #c3d1ec !important;
+    border-right: 1px solid #c3d1ec !important;
+    z-index: 1;
+    cursor: default;
+}
+.gbar-link-dropdown:hover .gbar-link-settings {
+    background-color: #fff;
+    box-sizing: border-box;
+    border-left: 1px solid #c3d1ec !important;
+    border-right: 1px solid #c3d1ec !important;
+}
+.gbar-link-dropdown:hover .gbar-link-text {
+    color: #36c;
+}
+#gbar-link-account {
+    font-weight: bold;
+}
+</style>
+<div class="gbar-links-row">
+    <a class="gbar-link gbar-link-active" id="gbar-link-web" href="https://www.google.com">
+        <span class="gbar-link-text">Web</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-images" href="https://images.google.com">
+        <span class="gbar-link-text">Images</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-videos" href="https://video.google.com">
+        <span class="gbar-link-text">Videos</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-maps" href="https://maps.google.com">
+        <span class="gbar-link-text">Maps</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-news" href="https://news.google.com">
+        <span class="gbar-link-text">News</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-shopping" href="https://shopping.google.com">
+        <span class="gbar-link-text">Shopping</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-gmail" href="https://mail.google.com">
+        <span class="gbar-link-text">Gmail</span>
+    </a>
+    <div class="gbar-link-dropdown">
+        <span class="gbar-link" id="gbar-link-more" href="https://about.google/products/">
+            <span class="gbar-link-text">more</span>
+            <div class="gbar-link-arrow"></div>
+        </span>
+        <div class="gbar-more-menu">
+            <a class="gbar-more-link" href="https://translate.google.com">
+                <span class="gbar-more-link-text">Translate</span>
+            </a>
+            <a class="gbar-more-link" href="https://books.google.com">
+                <span class="gbar-more-link-text">Books</span>
+            </a>
+            <a class="gbar-more-link" href="https://www.google.com/finance/">
+                <span class="gbar-more-link-text">Finance</span>
+            </a>
+            <a class="gbar-more-link" href="https://scholar.google.com">
+                <span class="gbar-more-link-text">Scholar</span>
+            </a>
+            <a class="gbar-more-link" href="https://blog.google/">
+                <span class="gbar-more-link-text">Blogs</span>
+            </a>
+            <div class="gbar-more-link-separator"></div>
+            <a class="gbar-more-link" href="https://www.youtube.com/">
+                <span class="gbar-more-link-text">YouTube</span>
+            </a>
+            <a class="gbar-more-link" href="https://calendar.google.com/">
+                <span class="gbar-more-link-text">Calendar</span>
+            </a>
+            <a class="gbar-more-link" href="https://photos.google.com/">
+                <span class="gbar-more-link-text">Photos</span>
+            </a>
+            <a class="gbar-more-link" href="https://docs.google.com/">
+                <span class="gbar-more-link-text">Documents</span>
+            </a>
+            <a class="gbar-more-link" href="https://sites.google.com/">
+                <span class="gbar-more-link-text">Sites</span>
+            </a>
+            <a class="gbar-more-link" href="https://groups.google.com/">
+                <span class="gbar-more-link-text">Groups</span>
+            </a>
+            <a class="gbar-more-link" href="https://www.google.com/reader/about/">
+                <span class="gbar-more-link-text">Reader</span>
+            </a>
+            <div class="gbar-more-link-separator"></div>
+            <a class="gbar-more-link" href="https://about.google/products/">
+                <span class="gbar-more-link-text">even more »</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="gbar-links-row">
+    <div class="gbar-link-separator"></div>
+    <a class="gbar-link" id="gbar-link-account" href="https://accounts.google.com/ServiceLogin">
+        <span class="gbar-link-text">Sign in</span>
+    </a>
+    <div class="gbar-link-separator"></div>
+    <div class="gbar-link-dropdown">
+        <span class="gbar-link-settings"></span>
+        <div class="gbar-settings-menu">
+            <a class="gbar-more-link" href="https://www.google.com/preferences">
+                <span class="gbar-more-link-text">Search Settings</span>
+            </a>
+            <div class="gbar-more-link-separator"></div>
+
+            <a class="gbar-more-link" href="http://www.google.com/ig?hl=en&source=iglk">
+                <span class="gbar-more-link-text">iGoogle</span>
+            </a>
+        </div>
+    </div>
+    <div class="gbar-link-separator"></div>
+</div>
