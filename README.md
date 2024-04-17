@@ -3,7 +3,7 @@ This userscript adds the old top bar (GBar) back to google.
 
 ## Usage Instructions
 * Install the [Tampermonkey](https://www.tampermonkey.net/) for your browser.
-* Install [GBar.user.js](https://github.com/CallyHam/GBar/raw/main/GBar.user.js) using Tampermonkey
+* Install [GBar.user.js](https://github.com/CallyHam/GBar/raw/main/GBar.user.js) using Tampermonkey.
 * Navigate to any website on the google.com domain to verify everything works!
 
 ## Previews
