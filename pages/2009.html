@@ -1,0 +1,96 @@
+<style>
+.gbar {
+    z-index: 998;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    position: relative;
+    height: 24px;
+    background-color: #fff;
+    border-bottom: 1px solid #c9d7f1;
+    justify-content: space-between;
+    padding: 0 8px;
+}
+.gbar-links-row {
+    display: flex;
+    align-items: center;
+}
+.gbar-link {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    height: 29px;
+    margin-right: 10.5px;
+    align-items: center;
+    text-decoration: none !important;
+}
+.right .gbar-link {
+    margin: 0 3px
+}
+.gbar-link-text {
+    color: #0000cc;
+    white-space: nowrap;
+    text-decoration: underline !important;
+}
+.gbar-link-active .gbar-link-text {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+.gbar-link-arrow {
+    color: #0000cc;
+    font-size: 10px;
+    margin-left: 4px;
+    margin-top: 2px;
+    text-decoration: none !important;
+}
+.gbar-link-separator {
+    color: #000;
+}
+.signed-in .gbar-link-text {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none !important;
+    cursor: text;
+}
+</style>
+<div class="gbar-links-row">
+    <a class="gbar-link gbar-link-active" id="gbar-link-web" href="https://www.google.com">
+        <span class="gbar-link-text">Web</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-images" href="https://images.google.com">
+        <span class="gbar-link-text">Images</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-videos" href="https://video.google.com">
+        <span class="gbar-link-text">Videos</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-maps" href="https://maps.google.com">
+        <span class="gbar-link-text">Maps</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-news" href="https://news.google.com">
+        <span class="gbar-link-text">News</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-shopping" href="https://shopping.google.com">
+        <span class="gbar-link-text">Shopping</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-gmail" href="https://mail.google.com">
+        <span class="gbar-link-text">Gmail</span>
+    </a>
+    <a class="gbar-link" id="gbar-link-more" href="https://about.google/products/">
+        <span class="gbar-link-text">more</span>
+        <span class="gbar-link-arrow">▼</span>
+    </a>
+</div>
+<div class="gbar-links-row right">
+    <a class="gbar-link" href="http://www.google.com/ig?hl=en&source=iglk">
+        <span class="gbar-link-text">iGoogle</span>
+    </a>
+    <span class="gbar-link-separator">|</span>
+    <a class="gbar-link" href="https://www.google.com/preferences">
+        <span class="gbar-link-text">Search settings</span>
+    </a>
+    <span class="gbar-link-separator">|</span>
+    <a class="gbar-link" id="gbar-link-account" href="https://accounts.google.com/ServiceLogin">
+        <span class="gbar-link-text">Sign in</span>
+    </a>
+</div>
