@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.0.1
+// @version      1.1.0
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
 // @run-at       document-body
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        none
+// @grant        GM_registerMenuCommand
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 
 var accountInfo
@@ -16,284 +18,104 @@ var accountEmail = "Sign in"
 
 function getUrl() {
     var currentFocused = document.getElementsByClassName('gbar-link-active')[0];
-    if (currentFocused) {
-        currentFocused.classList.remove('gbar-link-active')
-    }
-    if (window.location.href == "https://www.google.com/" || window.location.href.indexOf("webhp") > -1 || window.location.href.indexOf("www.google.com/search") > -1 && window.location.href.indexOf("tbm=") === -1) {
-        document.getElementById('gbar-link-web').classList.add('gbar-link-active')
-    }
     if (window.location.href.indexOf("tbm=isch") > -1 || window.location.href.indexOf("imghp") > -1 || window.location.href.indexOf("images.google.com") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-images').classList.add('gbar-link-active')
     } else if (window.location.href.indexOf("tbm=vid") > -1 || window.location.href.indexOf("videohp") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-videos').classList.add('gbar-link-active')
     } else if (window.location.href.indexOf("maps.google.com") > -1 || window.location.href.indexOf("google.com/maps") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-maps').classList.add('gbar-link-active')
     } else if (window.location.href.indexOf("news.google.com") > -1 || window.location.href.indexOf("tbm=nws") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-news').classList.add('gbar-link-active')
     } else if (window.location.href.indexOf("shopping.google.com") > -1 || window.location.href.indexOf("tbm=shop") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-shopping').classList.add('gbar-link-active')
     } else if (window.location.href.indexOf("mail.google.com") > -1) {
+        currentFocused.classList.remove('gbar-link-active')
         document.getElementById('gbar-link-gmail').classList.add('gbar-link-active')
     }
 }
 
-function detectAccountStatus() {
+async function detectAccountStatus() {
     var accountButton = document.getElementById('gbar-link-account')
     accountInfo = document.querySelectorAll('a[aria-label*="Google Account"]')[0]
     if (accountInfo) {
         var accountInfoSplit = accountInfo.getAttribute('aria-label').replace("(", "").replace(")", "").replace("Google Account: ", "").replace("\n", "").split('  ')
-        accountName = `+${accountInfoSplit[0]}`
+        accountName = accountInfoSplit[0]
         accountEmail = accountInfoSplit[1]
 
         var accountArrow = document.createElement('div')
         accountArrow.classList.add('gbar-link-arrow')
-
-        accountButton.childNodes[1].textContent = accountEmail
         accountButton.href = "https://accounts.google.com/SignOutOptions"
         accountButton.appendChild(accountArrow)
     }
 }
+async function applySettings() {
+    var styleSelect = await GM.getValue("styleSelect", "2011");
+    var accountSelect = await GM.getValue("accountSelect", "name");
+    var linkSelect = await GM.getValue("linkSelect", "web");
+
+    var accountButton = document.getElementById('gbar-link-account')
+    var searchButton = document.getElementById('gbar-link-web')
+
+    switch (await GM.getValue("accountSelect", "name")) {
+        case "name":
+            accountButton.childNodes[1].textContent = accountName
+            break
+        case "email":
+            accountButton.childNodes[1].textContent = accountEmail
+            break
+    }
+
+    switch (await GM.getValue("linkSelect", "web")) {
+        case "web":
+            searchButton.childNodes[1].textContent = "Web"
+            break
+        case "search":
+            searchButton.childNodes[1].textContent = "Search"
+            break
+    }
+}
 var gBar = document.createElement('div');
+var settingsPage = document.createElement('div');
+async function openSettings() {
+    var styleSelect = document.getElementById('year-style')
+    var accountSelect = document.getElementById('account-text')
+    var linkSelect = document.getElementById('search-text')
+    styleSelect.value = await GM.getValue("styleSelect", "2011");
+    accountSelect.value = await GM.getValue("accountSelect", "name");
+    linkSelect.value = await GM.getValue("linkSelect", "web");
+    settingsPage.classList.add('gbar-settings-active')
+}
+async function closeSettings() {
+    var styleSelect = document.getElementById('year-style')
+    var accountSelect = document.getElementById('account-text')
+    var linkSelect = document.getElementById('search-text')
+    await GM.setValue("styleSelect", styleSelect.value);
+    await GM.setValue("accountSelect", accountSelect.value);
+    await GM.setValue("linkSelect", linkSelect.value);
+    settingsPage.classList.remove('gbar-settings-active')
+    applySettings()
+}
+const settingsHTML = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/settings.html'
+const settingsResponse = await fetch(settingsHTML);
+const settingsData = await settingsResponse.text();
+settingsPage.innerHTML = settingsData
+settingsPage.classList.add('gbar-settings')
+
+const gbar2011 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2011.html'
+const gbar2011Response = await fetch(gbar2011);
+const gbar2011Data = await gbar2011Response.text();
 gBar.classList.add('gbar');
-gBar.innerHTML = `
-<style>
-.gbar {
-    z-index: 999;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    display: flex;
-    position: relative;
-    height: 29px;
-    background-color: #2d2d2d;
-    border-bottom: 1px solid #000;
-    justify-content: space-between;
-    padding: 0 4px;
-}
-.gbar-links-row {
-    display: flex;
-    align-items: center;
-}
-.gbar-link {
-    display: flex;
-    position: relative;
-    z-index: 2;
-    padding: 0 6px;
-    height: 27px;
-    align-items: center;
-    border-top: 2px solid transparent;
-    text-decoration: none !important;
-}
-.gbar-link:hover {
-    background-color: #4c4c4c;
-}
-.gbar-link-text {
-    color: #ccc;
-    white-space: nowrap;
-}
-.gbar-link-active.gbar-link {
-    border-top: 2px solid #dd4b39;
-}
-.gbar-link-active .gbar-link-text {
-    color: #fff;
-    font-weight: bold;
-}
-.gbar-link-arrow {
-    border: 3px solid transparent;
-    border-top: 3px solid #ccc;
-    margin-left: 4px;
-    margin-top: 5px;
-}
-.gbar-link-separator {
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 2%) 0%, rgba(255, 255, 255, 25%) 50%, rgba(255, 255, 255, 0%) 100%)
-}
-.gbar-link-settings {
-    display: flex;
-    position: relative;
-    z-index: 2;
-    height: 30px;
-    width: 28px;
-    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/SettingsIcon.svg');
-    background-repeat: no-repeat;
-    background-position: 50%;
-}
-.gbar-more-menu, .gbar-settings-menu {
-    display: none;
-}
-.gbar-more-link {
-    color: #36c !important;
-    text-decoration: none !important;
-    padding: 6px 20px;
-}
-.gbar-more-link:hover {
-    background-color: #eff3fb;
-}
-.gbar-more-link-separator {
-    width: 100%;
-    height: 1px;
-    margin: 10px 0;
-    background-color: #e5e5e5;
-}
-#gbar-link-more {
-    padding: 1px 5px 0 5px;
-    border: 1px solid transparent;
-}
-.gbar-link-dropdown {
-    position: relative;
-}
-.gbar-link-dropdown:hover > .gbar-more-menu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    white-space: nowrap;
-    padding: 10px 0;
-    z-index: 0;
-    background-color: #fff;
-    border: 1px solid #bebebe;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    top: calc(100% - 1px);
-    left: 0;
-}
-.gbar-link-dropdown:hover > .gbar-settings-menu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    white-space: nowrap;
-    padding: 10px 0;
-    z-index: 0;
-    background-color: #fff;
-    border: 1px solid #bebebe;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    top: calc(100% - 1px);
-    right: 0;
-}
-.gbar-link-dropdown:hover .gbar-link {
-    background-color: #fff;
-    border: none !important;
-    padding-top: 2px !important;
-    padding-bottom: 1px !important;
-    border-left: 1px solid #bebebe !important;
-    border-right: 1px solid #bebebe !important;
-    z-index: 1;
-    cursor: default;
-}
-.gbar-link-dropdown:hover .gbar-link-settings {
-    background: url('https://raw.githubusercontent.com/CallyHam/GBar/main/images/SettingsIconHover.svg');
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    padding: 0;
-    box-sizing: border-box;
-    border-left: 1px solid #bebebe !important;
-    border-right: 1px solid #bebebe !important;
-}
-.gbar-link-dropdown:hover .gbar-link-text {
-    color: #36c;
-}
-#gbar-link-account {
-    font-weight: bold;
-}
-</style>
-<div class="gbar-links-row">
-    <a class="gbar-link gbar-link-active" id="gbar-link-web" href="https://www.google.com">
-        <span class="gbar-link-text">Web</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-images" href="https://images.google.com">
-        <span class="gbar-link-text">Images</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-videos" href="https://video.google.com">
-        <span class="gbar-link-text">Videos</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-maps" href="https://maps.google.com">
-        <span class="gbar-link-text">Maps</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-news" href="https://news.google.com">
-        <span class="gbar-link-text">News</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-shopping" href="https://shopping.google.com">
-        <span class="gbar-link-text">Shopping</span>
-    </a>
-    <a class="gbar-link" id="gbar-link-gmail" href="https://mail.google.com">
-        <span class="gbar-link-text">Gmail</span>
-    </a>
-    <div class="gbar-link-dropdown">
-        <span class="gbar-link" id="gbar-link-more" href="https://about.google/products/">
-            <span class="gbar-link-text">More</span>
-            <div class="gbar-link-arrow"></div>
-        </span>
-        <div class="gbar-more-menu">
-            <a class="gbar-more-link" href="https://translate.google.com">
-                <span class="gbar-more-link-text">Translate</span>
-            </a>
-            <a class="gbar-more-link" href="https://books.google.com">
-                <span class="gbar-more-link-text">Books</span>
-            </a>
-            <a class="gbar-more-link" href="https://www.google.com/finance/">
-                <span class="gbar-more-link-text">Finance</span>
-            </a>
-            <a class="gbar-more-link" href="https://scholar.google.com">
-                <span class="gbar-more-link-text">Scholar</span>
-            </a>
-            <a class="gbar-more-link" href="https://blog.google/">
-                <span class="gbar-more-link-text">Blogs</span>
-            </a>
-            <div class="gbar-more-link-separator"></div>
-            <a class="gbar-more-link" href="https://www.youtube.com/">
-                <span class="gbar-more-link-text">YouTube</span>
-            </a>
-            <a class="gbar-more-link" href="https://calendar.google.com/">
-                <span class="gbar-more-link-text">Calendar</span>
-            </a>
-            <a class="gbar-more-link" href="https://photos.google.com/">
-                <span class="gbar-more-link-text">Photos</span>
-            </a>
-            <a class="gbar-more-link" href="https://docs.google.com/">
-                <span class="gbar-more-link-text">Documents</span>
-            </a>
-            <a class="gbar-more-link" href="https://sites.google.com/">
-                <span class="gbar-more-link-text">Sites</span>
-            </a>
-            <a class="gbar-more-link" href="https://groups.google.com/">
-                <span class="gbar-more-link-text">Groups</span>
-            </a>
-            <a class="gbar-more-link" href="https://www.google.com/reader/about/">
-                <span class="gbar-more-link-text">Reader</span>
-            </a>
-            <div class="gbar-more-link-separator"></div>
-            <a class="gbar-more-link" href="https://about.google/products/">
-                <span class="gbar-more-link-text">Even More »</span>
-            </a>
-        </div>
-    </div>
-</div>
-<div class="gbar-links-row">
-    <a class="gbar-link" id="gbar-link-account" href="https://accounts.google.com/ServiceLogin">
-        <span class="gbar-link-text">Sign in</span>
-    </a>
-    <div class="gbar-link-separator"></div>
-    <div class="gbar-link-dropdown">
-        <span class="gbar-link-settings"></span>
-        <div class="gbar-settings-menu">
-            <a class="gbar-more-link" href="https://www.google.com/preferences">
-                <span class="gbar-more-link-text">Search Settings</span>
-            </a>
-            <div class="gbar-more-link-separator"></div>
+gBar.innerHTML = gbar2011Data;
 
-            <a class="gbar-more-link" href="http://www.google.com/ig?hl=en&source=iglk">
-                <span class="gbar-more-link-text">iGoogle</span>
-            </a>
-            <div class="gbar-more-link-separator"></div>
-
-            <a class="gbar-more-link" href="https://myactivity.google.com/product/search">
-                <span class="gbar-more-link-text">Web History</span>
-            </a>
-        </div>
-    </div>
-</div>
-`;
 document.body.insertBefore(gBar, document.body.firstChild);
+document.body.insertBefore(settingsPage, document.body.firstChild);
+document.getElementById('gbar-settings-confirm').onclick = closeSettings;
 getUrl()
-window.addEventListener('load', function() {
-    detectAccountStatus()
-}, false);
+detectAccountStatus()
+applySettings()
+GM_registerMenuCommand("Open Settings", openSettings);
