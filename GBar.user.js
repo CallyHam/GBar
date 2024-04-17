@@ -16,6 +16,9 @@ var accountInfo
 var accountName = "Sign in"
 var accountEmail = "Sign in"
 
+var gBar = document.createElement('div');
+var settingsPage = document.createElement('div');
+
 function getUrl() {
     var currentFocused = document.getElementsByClassName('gbar-link-active')[0];
     if (window.location.href.indexOf("tbm=isch") > -1 || window.location.href.indexOf("imghp") > -1 || window.location.href.indexOf("images.google.com") > -1) {
@@ -46,11 +49,9 @@ async function detectAccountStatus() {
         var accountInfoSplit = accountInfo.getAttribute('aria-label').replace("(", "").replace(")", "").replace("Google Account: ", "").replace("\n", "").split('  ')
         accountName = accountInfoSplit[0]
         accountEmail = accountInfoSplit[1]
-
-        var accountArrow = document.createElement('div')
-        accountArrow.classList.add('gbar-link-arrow')
-        accountButton.href = "https://accounts.google.com/SignOutOptions"
-        accountButton.appendChild(accountArrow)
+        return true;
+    } else {
+        return false;
     }
 }
 async function applySettings() {
@@ -58,19 +59,52 @@ async function applySettings() {
     var accountSelect = await GM.getValue("accountSelect", "name");
     var linkSelect = await GM.getValue("linkSelect", "web");
 
+    switch (styleSelect) {
+        case "2011":
+            var gbar2011 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2011.html'
+            var gbar2011Response = await fetch(gbar2011);
+            var gbar2011Data = await gbar2011Response.text();
+            gBar.classList.add('gbar');
+            gBar.innerHTML = gbar2011Data;
+            document.body.insertBefore(gBar, document.body.firstChild);
+            break
+        case "2013":
+            var gbar2013 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2013.html'
+            var gbar2013Response = await fetch(gbar2013);
+            var gbar2013Data = await gbar2013Response.text();
+            gBar.classList.add('gbar');
+            gBar.innerHTML = gbar2013Data
+            document.body.insertBefore(gBar, document.body.firstChild);
+            document.body.insertBefore(gBar, document.body.firstChild);
+            break
+
+    }
+    getUrl()
+
+    var accountStatus = detectAccountStatus()
+
     var accountButton = document.getElementById('gbar-link-account')
     var searchButton = document.getElementById('gbar-link-web')
-
-    switch (await GM.getValue("accountSelect", "name")) {
-        case "name":
-            accountButton.childNodes[1].textContent = accountName
-            break
-        case "email":
-            accountButton.childNodes[1].textContent = accountEmail
-            break
+    if (accountStatus) {
+        switch (accountSelect) {
+            case "name":
+                accountButton.childNodes[1].textContent = accountName
+                break
+            case "email":
+                accountButton.childNodes[1].textContent = accountEmail
+                break
+        }
+        if (styleSelect != "2013" && styleSelect != "2009") {
+            var accountArrow = document.createElement('div')
+            accountArrow.classList.add('gbar-link-arrow')
+            accountButton.href = "https://accounts.google.com/SignOutOptions"
+            accountButton.appendChild(accountArrow)
+        }
     }
 
-    switch (await GM.getValue("linkSelect", "web")) {
+    document.getElementById('gbar-settings-confirm').onclick = closeSettings;
+    GM_registerMenuCommand("Open Settings", openSettings);
+    switch (linkSelect) {
         case "web":
             searchButton.childNodes[1].textContent = "Web"
             break
@@ -79,8 +113,6 @@ async function applySettings() {
             break
     }
 }
-var gBar = document.createElement('div');
-var settingsPage = document.createElement('div');
 async function openSettings() {
     var styleSelect = document.getElementById('year-style')
     var accountSelect = document.getElementById('account-text')
@@ -100,22 +132,156 @@ async function closeSettings() {
     settingsPage.classList.remove('gbar-settings-active')
     applySettings()
 }
-const settingsHTML = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/settings.html'
-const settingsResponse = await fetch(settingsHTML);
-const settingsData = await settingsResponse.text();
-settingsPage.innerHTML = settingsData
-settingsPage.classList.add('gbar-settings')
-
-const gbar2011 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2011.html'
-const gbar2011Response = await fetch(gbar2011);
-const gbar2011Data = await gbar2011Response.text();
-gBar.classList.add('gbar');
-gBar.innerHTML = gbar2011Data;
-
-document.body.insertBefore(gBar, document.body.firstChild);
-document.body.insertBefore(settingsPage, document.body.firstChild);
-document.getElementById('gbar-settings-confirm').onclick = closeSettings;
-getUrl()
-detectAccountStatus()
 applySettings()
-GM_registerMenuCommand("Open Settings", openSettings);
+
+settingsPage.innerHTML = `
+<style>
+.gbar-settings {
+    display: none;
+}
+.gbar-settings.gbar-settings-active {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 50%);
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+}
+.gbar-settings-center {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 80%;
+    background-color: #fff;
+    border: 1px solid #bebebe;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.gbar-settings-section {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 0 20px;
+}
+.gbar-settings-header {
+    font-size: 15pt;
+    width: calc(100% - 20px);
+    height: 55px;
+    padding-left: 20px;
+    text-align: left;
+    line-height: 55px;
+    color: #de4b39;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
+    text-justify: center;
+}
+.gbar-setting-title {
+    font-size: 12pt;
+    color: #444;
+    text-align: left;
+    margin: 20px 0;
+}
+.gbar-settings-footer {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f1f1f1;
+    height: 55px;
+    padding: 0 10px;
+    justify-content: center;
+    align-items: flex-end;
+}
+#gbar-settings-confirm {
+    color: #fff;
+    user-select: none;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: #2196F3;
+    border: 1px solid #1E88E5;
+    padding: 8px 12px;
+}
+#gbar-settings-confirm:hover {
+    background-color: #42A5F5;
+    border: 1px solid #2196F3;
+}
+#gbar-settings-confirm:active {
+    background-color: #1E88E5;
+    border: 1px solid #1976D2;
+}
+.gbar-select-setting {
+    width: 75%;
+    height: 30px;
+    appearance: none;
+    font-size: 8pt;
+    font-weight: bold;
+    background-color: #f4f4f4;
+    color: #444;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+}
+.gbar-select-setting option {
+    appearance: none;
+    font-size: 10pt;
+    font-weight: normal;
+    color: #333 !important;
+    padding: 100px;
+    border: 1px solid #ccc;
+}
+.gbar-select-setting option:hover {
+    appearance: none;
+    background: #eee !important;
+}
+.gbar-select-setting:hover {
+    border-color: #c6c6c6;
+    background: linear-gradient(to bottom,#f8f8f8,#f1f1f1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer
+}
+.gbar-select-setting:focus {
+    border-color: #ccc;
+    background: linear-gradient(to bottom,#eee,#e0e0e0);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    cursor: pointer
+}
+.gbar-settings-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #ebebeb;
+    margin-top: 20px;
+}
+</style>
+<form class="gbar-settings-center" onsubmit="return false;">
+    <span class="gbar-settings-header">GBar Settings</span>
+    <div class="gbar-settings-section">
+        <span class="gbar-setting-title">Style Selection</span>
+        <select class="gbar-select-setting" name="year-style" id="year-style">
+            <option value="2009">2009 (Not Working)</option>
+            <option value="2010">2010 (Not Working)</option>
+            <option value="2011">2011</option>
+            <option value="2013">2013</option>
+        </select>
+        <div class="gbar-settings-separator"></div>
+        <span class="gbar-setting-title">Account Button Text</span>
+        <select class="gbar-select-setting" name="account-text" id="account-text">
+                <option value="name">Account Name</option>
+                <option value="email">Account Email</option>
+        </select>
+        <div class="gbar-settings-separator"></div>
+        <span class="gbar-setting-title">Google Search Link Text</span>
+        <select class="gbar-select-setting" name="search-text" id="search-text">
+                <option value="web">Web</option>
+                <option value="search">Search</option>
+        </select>
+    </div>
+    <div class="gbar-settings-footer">
+        <button id="gbar-settings-confirm">OK</button>
+    </div>
+</form>
+
+`
+settingsPage.classList.add('gbar-settings')
+document.body.insertBefore(settingsPage, document.body.firstChild);
