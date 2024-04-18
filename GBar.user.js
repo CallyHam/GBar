@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.3
+// @version      1.3.4
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -15,8 +15,8 @@
 // ==/UserScript==
 
 var accountInfo
-var accountName = "Sign in"
-var accountEmail = "Sign in"
+var accountName
+var accountEmail
 
 var gBar = document.createElement('div');
 var settingsPage = document.createElement('div');
@@ -101,11 +101,11 @@ async function applySettings() {
         document.getElementsByClassName('gbar-link-active')[0].removeAttribute('href')
     }
 
-    var accountStatus = detectAccountStatus()
+    var accountStatus = await detectAccountStatus()
 
     var accountButton = document.getElementById('gbar-link-account')
     var searchButton = document.getElementById('gbar-link-web')
-    if (accountStatus) {
+    if (accountStatus === true) {
         switch (accountSelect) {
             case "name":
                 accountButton.childNodes[1].textContent = accountName
