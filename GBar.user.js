@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.0
+// @version      1.3.1
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -155,6 +155,7 @@ applySettings()
 
 settingsPage.innerHTML = `
 <style>
+@import url('https://fonts.googleapis.com/css?family=Arial&display=swap');
 .gbar-settings {
     display: none;
 }
@@ -189,10 +190,10 @@ settingsPage.innerHTML = `
 .gbar-settings-header {
     font-size: 15pt;
     width: calc(100% - 20px);
-    height: 55px;
+    height: 50px;
     padding-left: 20px;
     text-align: left;
-    line-height: 55px;
+    line-height: 50px;
     color: #de4b39;
     background-color: #f1f1f1;
     border-bottom: 1px solid #e5e5e5;
@@ -209,7 +210,7 @@ settingsPage.innerHTML = `
     flex-direction: column;
     border-top: 1px solid #e5e5e5;
     background-color: #f1f1f1;
-    height: 55px;
+    height: 45px;
     padding: 0 10px;
     justify-content: center;
     align-items: flex-end;
@@ -217,27 +218,26 @@ settingsPage.innerHTML = `
 #gbar-settings-confirm {
     color: #fff;
     user-select: none;
-    font-size: 12px;
+    font-size: 8pt;
     font-weight: bold;
-    border-radius: 3px;
-    background-color: #2196F3;
-    border: 1px solid #1E88E5;
-    padding: 8px 12px;
+    border-radius: 2px;
+    background-color: #1b7fcc;
+    border: 1px solid #1b7fcc;
+    padding: 7px 10px;
 }
 #gbar-settings-confirm:hover {
-    background-color: #42A5F5;
-    border: 1px solid #2196F3;
+    background-color: #126db3;
 }
 #gbar-settings-confirm:active {
-    background-color: #1E88E5;
-    border: 1px solid #1976D2;
+    background-color: #095b99;
 }
 .gbar-select-setting {
     width: 75%;
-    height: 30px;
+    height: 35px;
     appearance: none;
     font-size: 8pt;
     font-weight: bold;
+    padding: 0 10px;
     background-color: #f4f4f4;
     color: #444;
     border: 1px solid #dcdcdc;
