@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.1
+// @version      1.3.2
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -15,8 +15,8 @@
 // ==/UserScript==
 
 var accountInfo
-var accountName = "Sign in"
-var accountEmail = "Sign in"
+var accountName
+var accountEmail
 
 var gBar = document.createElement('div');
 var settingsPage = document.createElement('div');
@@ -97,6 +97,9 @@ async function applySettings() {
             break
     }
     getUrl()
+    if (styleSelect == "2009") {
+        document.getElementsByClassName('gbar-link-active')[0].removeAttribute('href')
+    }
 
     var accountStatus = detectAccountStatus()
 
@@ -118,6 +121,7 @@ async function applySettings() {
             accountButton.appendChild(accountArrow)
         } else if (styleSelect == "2009") {
             accountButton.classList.add('signed-in')
+            accountButton.removeAttribute('href')
         }
     }
 
