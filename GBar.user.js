@@ -113,6 +113,9 @@ async function applySettings() {
             case "email":
                 accountButton.childNodes[1].textContent = accountEmail
                 break
+            case "plus-name":
+                accountButton.childNodes[1].textContent = `+${accountName}`
+                break
         }
         if (styleSelect != "2013" && styleSelect != "2009") {
             var accountArrow = document.createElement('div')
@@ -289,10 +292,11 @@ settingsPage.innerHTML = `
             <option value="2013">2013</option>
         </select>
         <div class="gbar-settings-separator"></div>
-        <span class="gbar-setting-title">Account Button Text</span>
+        <span class="gbar-setting-title">Account Button Text Format</span>
         <select class="gbar-select-setting" name="account-text" id="account-text">
-                <option value="name">Account Name</option>
-                <option value="email">Account Email</option>
+                <option value="name">Name</option>
+                <option value="plus-name">+Name</option>
+                <option value="email">Email</option>
         </select>
         <div class="gbar-settings-separator"></div>
         <span class="gbar-setting-title">Google Search Link Text</span>
