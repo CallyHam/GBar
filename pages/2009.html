@@ -53,6 +53,43 @@
     text-decoration: none !important;
     cursor: text;
 }
+.gbar-more-menu {
+    display: none;
+}
+.gbar-more-link {
+    color: #0000cc !important;
+    text-decoration: none !important;
+    padding: 3px 6px;
+}
+.gbar-more-link:hover {
+    color: #fff !important;
+    background-color: #3366cc;
+}
+.gbar-more-link-separator {
+    width: 90%;
+    align-self: center;
+    height: 1px;
+    margin: 3px 0;
+    background-color: #c9d7f1;
+}
+.gbar-link-dropdown {
+    position: relative;
+}
+.gbar-link-dropdown:hover > .gbar-more-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 0;
+    background-color: #fff;
+    border-top: 1px solid #c9d7f1 !important;
+    border: 1px solid #3366cc;
+    top: calc(100% - 3px);
+    left: 0;
+}
+#gbar-link-more {
+    cursor: default;
+}
 </style>
 <div class="gbar-links-row">
     <a class="gbar-link gbar-link-active" id="gbar-link-web" href="https://www.google.com">
@@ -76,10 +113,55 @@
     <a class="gbar-link" id="gbar-link-gmail" href="https://mail.google.com">
         <span class="gbar-link-text">Gmail</span>
     </a>
-    <a class="gbar-link" id="gbar-link-more" href="https://about.google/products/">
-        <span class="gbar-link-text">more</span>
-        <span class="gbar-link-arrow">▼</span>
-    </a>
+    <div class="gbar-link-dropdown">
+        <span class="gbar-link" id="gbar-link-more" href="https://about.google/products/">
+            <span class="gbar-link-text">more</span>
+            <span class="gbar-link-arrow">▼</span>
+        </span>
+        <div class="gbar-more-menu">
+            <a class="gbar-more-link" href="https://translate.google.com">
+                <span class="gbar-more-link-text">Translate</span>
+            </a>
+            <a class="gbar-more-link" href="https://books.google.com">
+                <span class="gbar-more-link-text">Books</span>
+            </a>
+            <a class="gbar-more-link" href="https://www.google.com/finance/">
+                <span class="gbar-more-link-text">Finance</span>
+            </a>
+            <a class="gbar-more-link" href="https://scholar.google.com">
+                <span class="gbar-more-link-text">Scholar</span>
+            </a>
+            <a class="gbar-more-link" href="https://blog.google/">
+                <span class="gbar-more-link-text">Blogs</span>
+            </a>
+            <div class="gbar-more-link-separator"></div>
+            <a class="gbar-more-link" href="https://www.youtube.com/">
+                <span class="gbar-more-link-text">YouTube</span>
+            </a>
+            <a class="gbar-more-link" href="https://calendar.google.com/">
+                <span class="gbar-more-link-text">Calendar</span>
+            </a>
+            <a class="gbar-more-link" href="https://photos.google.com/">
+                <span class="gbar-more-link-text">Photos</span>
+            </a>
+            <a class="gbar-more-link" href="https://docs.google.com/">
+                <span class="gbar-more-link-text">Documents</span>
+            </a>
+            <a class="gbar-more-link" href="https://sites.google.com/">
+                <span class="gbar-more-link-text">Sites</span>
+            </a>
+            <a class="gbar-more-link" href="https://groups.google.com/">
+                <span class="gbar-more-link-text">Groups</span>
+            </a>
+            <a class="gbar-more-link" href="https://www.google.com/reader/about/">
+                <span class="gbar-more-link-text">Reader</span>
+            </a>
+            <div class="gbar-more-link-separator"></div>
+            <a class="gbar-more-link" href="https://about.google/products/">
+                <span class="gbar-more-link-text">even more »</span>
+            </a>
+        </div>
+    </div>
 </div>
 <div class="gbar-links-row right">
     <a class="gbar-link" href="http://www.google.com/ig?hl=en&source=iglk">
