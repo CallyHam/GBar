@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.2
+// @version      1.3.3
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
