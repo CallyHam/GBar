@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.5
+// @version      1.3.6
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -10,6 +10,7 @@
 // @grant        GM_registerMenuCommand
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @noframes
 // @downloadURL  https://github.com/CallyHam/GBar/raw/main/GBar.user.js
 // @updateURL    https://github.com/CallyHam/GBar/raw/main/GBar.user.js
 // ==/UserScript==
