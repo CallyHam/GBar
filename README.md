@@ -17,7 +17,8 @@ This userscript adds the old top bar (GBar) back to google.
 <details><summary>2009</summary>
 
   
-![2009](https://github.com/CallyHam/GBar/blob/main/previews/2009.png?raw=true)
+![2009 1](https://github.com/CallyHam/GBar/blob/main/previews/2009-1.png?raw=true)
+![2009 2](https://github.com/CallyHam/GBar/blob/main/previews/2009-2.png?raw=true)
 </details>
 <details><summary>2010</summary>
 
