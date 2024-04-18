@@ -15,8 +15,8 @@
 // ==/UserScript==
 
 var accountInfo
-var accountName
-var accountEmail
+var accountName = "Sign in"
+var accountEmail = "Sign in"
 
 var gBar = document.createElement('div');
 var settingsPage = document.createElement('div');
