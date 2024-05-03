@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.4.2
+// @version      1.4.3
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
 // @exclude      *://www.google.com/gplex
-// @run-at       document-body
+// @run-at       document-idle
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_registerMenuCommand
 // @grant        GM_getValue
