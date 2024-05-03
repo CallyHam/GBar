@@ -169,7 +169,7 @@ settingsPage.innerHTML = `
 }
 .gbar-settings.gbar-settings-active {
     font-family: Arial, sans-serif;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     align-items: center;
     justify-content: center;
