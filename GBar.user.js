@@ -313,4 +313,4 @@ settingsPage.innerHTML = `
 
 `
 settingsPage.classList.add('gbar-settings')
-document.insertBefore(settingsPage, document.firstChild);
+document.documentElement.insertBefore(settingsPage, document.documentElement.firstChild);
