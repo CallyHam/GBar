@@ -62,7 +62,7 @@ async function applySettings() {
     var styleSelect = await GM.getValue("styleSelect", "2011");
     var accountSelect = await GM.getValue("accountSelect", "name");
     var linkSelect = await GM.getValue("linkSelect", "web");
-    var gplex = await document.getElementById("ugf-program")
+    var gplex = await document.getElementById("ugf")
 
     switch (styleSelect) {
         case "2009":
