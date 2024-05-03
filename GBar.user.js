@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.4.0
+// @version      1.4.1
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -62,6 +62,7 @@ async function applySettings() {
     var styleSelect = await GM.getValue("styleSelect", "2011");
     var accountSelect = await GM.getValue("accountSelect", "name");
     var linkSelect = await GM.getValue("linkSelect", "web");
+    var gplex = await document.getElementById("ugf")
 
     switch (styleSelect) {
         case "2009":
@@ -93,7 +94,11 @@ async function applySettings() {
             gBar.innerHTML = gbar2013Data
             break
     }
-    document.documentElement.insertBefore(gBar, document.documentElement.firstChild);
+    if (gplex) {
+        gplex.prepend(gBar);
+    } else {
+        document.documentElement.insertBefore(gBar, document.documentElement.firstChild);
+    }
     getUrl()
     if (styleSelect == "2009") {
         document.getElementsByClassName('gbar-link-active')[0].removeAttribute('href')
