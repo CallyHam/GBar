@@ -5,7 +5,6 @@
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
-// @exclude      https://www.google.com/gplex
 // @run-at       document-body
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_registerMenuCommand
@@ -314,4 +313,4 @@ settingsPage.innerHTML = `
 
 `
 settingsPage.classList.add('gbar-settings')
-document.body.insertBefore(settingsPage, document.body.firstChild);
+document.insertBefore(settingsPage, document.firstChild);
