@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.4.1
+// @version      1.4.2
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -62,7 +62,7 @@ async function applySettings() {
     var styleSelect = await GM.getValue("styleSelect", "2011");
     var accountSelect = await GM.getValue("accountSelect", "name");
     var linkSelect = await GM.getValue("linkSelect", "web");
-    var gplex = await document.getElementById("ugf")
+    var gplex = await document.getElementById("ugf-program")
 
     switch (styleSelect) {
         case "2009":
