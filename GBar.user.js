@@ -5,6 +5,7 @@
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
+// @exclude      *://*.google.com/gplex
 // @run-at       document-body
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_registerMenuCommand
