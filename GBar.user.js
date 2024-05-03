@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.4.3
+// @version      1.4.4
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
@@ -139,6 +139,9 @@ async function applySettings() {
             break
         case "search":
             searchButton.childNodes[1].textContent = "Search"
+            if (styleSelect == "2011") {
+                document.querySelector(`a.gbar-more-link[href='https://myactivity.google.com/product/search'] > .gbar-more-link-text`).textContent = "Search History"
+            }
             break
     }
 }
