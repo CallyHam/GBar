@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         GBar
 // @namespace    https://www.github.com/CallyHam
-// @version      1.3.6
+// @version      1.4.0
 // @description  Bring back the gbar.
 // @author       CallyHam
 // @match        *://*.google.com/*
+// @exclude      *://www.google.com/gplex
 // @run-at       document-body
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_registerMenuCommand
@@ -69,7 +70,6 @@ async function applySettings() {
             var gbar2009Data = await gbar2009Response.text();
             gBar.classList.add('gbar');
             gBar.innerHTML = gbar2009Data
-            document.body.insertBefore(gBar, document.body.firstChild);
             break
         case "2010":
             var gbar2010 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2010.html'
@@ -77,7 +77,6 @@ async function applySettings() {
             var gbar2010Data = await gbar2010Response.text();
             gBar.classList.add('gbar');
             gBar.innerHTML = gbar2010Data;
-            document.body.insertBefore(gBar, document.body.firstChild);
             break
         case "2011":
             var gbar2011 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2011.html'
@@ -85,7 +84,6 @@ async function applySettings() {
             var gbar2011Data = await gbar2011Response.text();
             gBar.classList.add('gbar');
             gBar.innerHTML = gbar2011Data;
-            document.body.insertBefore(gBar, document.body.firstChild);
             break
         case "2013":
             var gbar2013 = 'https://raw.githubusercontent.com/CallyHam/GBar/main/pages/2013.html'
@@ -93,10 +91,9 @@ async function applySettings() {
             var gbar2013Data = await gbar2013Response.text();
             gBar.classList.add('gbar');
             gBar.innerHTML = gbar2013Data
-            document.body.insertBefore(gBar, document.body.firstChild);
-            document.body.insertBefore(gBar, document.body.firstChild);
             break
     }
+    document.documentElement.insertBefore(gBar, document.documentElement.firstChild);
     getUrl()
     if (styleSelect == "2009") {
         document.getElementsByClassName('gbar-link-active')[0].removeAttribute('href')
