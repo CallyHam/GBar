@@ -1,6 +1,9 @@
 # GBar
 This userscript adds the old top bar (GBar) back to google.
 
+# New Version
+A new much better version of this script is now available, you can find it [here](https://github.com/CallyHam/Google-Gbar/)
+
 ## Usage Instructions
 * Install the [Tampermonkey](https://www.tampermonkey.net/) for your browser.
 * Install [GBar.user.js](https://github.com/CallyHam/GBar/raw/main/GBar.user.js) using Tampermonkey.
